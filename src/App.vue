@@ -25,7 +25,8 @@ import ScrollCar from './components/navigation/ScrollCar.vue';
 import MiniPlayer from './components/player/MiniPlayer.vue';
 import { bindCommandPaletteHotkey } from './composables/useCommandPalette';
 import { startReveal, stopReveal } from './composables/useReveal';
-import { installAntiInspect, uninstallAntiInspect } from './composables/useAntiInspect';
+// Anti-inspect COMPLETELY DISABLED for debugging
+// import { installAntiInspect, uninstallAntiInspect } from './composables/useAntiInspect';
 
 onMounted(() => {
     // Use requestIdleCallback for non-critical initialization
@@ -33,21 +34,21 @@ onMounted(() => {
         requestIdleCallback(() => {
             bindCommandPaletteHotkey();
             startReveal();
-            installAntiInspect();
+            // installAntiInspect(); // DISABLED
         });
     } else {
         // Fallback for browsers without requestIdleCallback
         setTimeout(() => {
             bindCommandPaletteHotkey();
             startReveal();
-            installAntiInspect();
+            // installAntiInspect(); // DISABLED
         }, 100);
     }
 });
 
 onBeforeUnmount(() => {
     stopReveal();
-    uninstallAntiInspect();
+    // uninstallAntiInspect(); // DISABLED
 });
 </script>
 
