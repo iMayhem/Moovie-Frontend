@@ -1,0 +1,100 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Moovie reference project
+Moovie/
+Moovie
+
+# Backend folder (contains sensitive server code and credentials)
+backend/
+
+# Wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
+
+# Kilocode/Kiro AI assistant files
+.kilocode/
+.kiro/
+
+# Internal development documentation (not needed for deployment)
+ANTI_INSPECT_GUIDE.md
+AUTO_FALLBACK_FEATURE.md
+BACKEND_SEPARATION_SUMMARY.md
+CACHING_SOLUTION.md
+CHANGES_SUMMARY.md
+CINESTREAM_FIX.md
+COMPLETE_OPTIMIZATION_SUMMARY.md
+DEPLOYMENT_CHECKLIST.md
+DEPLOYMENT_GUIDE.md
+MOBILE_WATCH_TOGETHER.md
+OPTIMIZATION_FLOW.md
+OPTIMIZATION_SUMMARY.md
+PERFORMANCE_GUIDE.md
+PERFORMANCE_OPTIMIZATIONS.md
+PERFORMANCE_OPTIMIZATION_COMPLETE.md
+PERFORMANCE_QUICK_START.md
+PERFORMANCE_RESULTS.md
+PROTECTION_SUMMARY.md
+PUBLIC_RELEASE_CHECKLIST.md
+QUICK_REFERENCE.md
+QUICK_START_PUBLIC.md
+README_PERFORMANCE.md
+READY_TO_DEPLOY.md
+RESOLVER_FIX.md
+START_HERE.md
+START_LOCAL_DEV.md
+STATUS_FOLDER_INFO.md
+architecture.md
+
+# Development/fix scripts
+fix.js
+
+# Test files (not needed in production)
+public/test-protection.html
+dist/test-protection.html
+
+# Performance optimization marker
+.performance-optimizations-applied
+
+# Git history management files (internal use only)
+GIT_HISTORY_RESET_COMPLETE.md
+PUSH_TO_GITHUB.md
+reset-git-history.sh
+
+# Keep these documentation files for public repo:
+!README.md
+!SETUP_GUIDE.md
+!LICENSE
+!CONTRIBUTING.md
