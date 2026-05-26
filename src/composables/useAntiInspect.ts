@@ -23,10 +23,8 @@ let intervalId: number | null = null;
 let listeners: Array<{ target: EventTarget; type: string; handler: any; opts?: any }> = [];
 
 const shouldGuard = () => {
-    // Always guard in production
-    if (import.meta.env.PROD) return true;
-    // In dev, check if VITE_ANTI_INSPECT is explicitly enabled
-    return import.meta.env.VITE_ANTI_INSPECT === '1';
+    // Completely disabled - allow DevTools and right-click
+    return false;
 };
 
 const swallow = (e: Event) => {

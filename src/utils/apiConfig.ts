@@ -14,22 +14,29 @@ export function getBackendApiUrl(): string {
   // Check if backend URL is explicitly set in environment
   const envBackendUrl = import.meta.env.VITE_BACKEND_API_URL;
   
+  console.log('[API Config] Environment backend URL:', envBackendUrl);
+  
   if (envBackendUrl) {
     // Remove trailing slash if present
-    return envBackendUrl.replace(/\/$/, '');
+    const cleanUrl = envBackendUrl.replace(/\/$/, '');
+    console.log('[API Config] Using environment backend URL:', cleanUrl);
+    return cleanUrl;
   }
   
   // Check if running on localhost (development mode)
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
+    console.log('[API Config] Current hostname:', hostname);
     
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       // Local development - assume Express server on port 3000
+      console.log('[API Config] Using local development backend: http://localhost:3000');
       return 'http://localhost:3000';
     }
   }
   
   // Production - use same domain (Cloudflare Pages Functions at /api/*)
+  console.log('[API Config] Using same domain (relative paths)');
   return '';
 }
 
@@ -41,14 +48,20 @@ export function getBackendApiUrl(): string {
 export function buildApiUrl(path: string): string {
   const backendUrl = getBackendApiUrl();
   
+  console.log('[API Config] Building API URL for path:', path);
+  console.log('[API Config] Backend URL:', backendUrl);
+  
   // If backend URL is set, prepend it
   if (backendUrl) {
     // Remove leading slash from path if present
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${backendUrl}${cleanPath}`;
+    const fullUrl = `${backendUrl}${cleanPath}`;
+    console.log('[API Config] Full URL:', fullUrl);
+    return fullUrl;
   }
   
   // Otherwise, use relative path (same domain)
+  console.log('[API Config] Using relative path:', path);
   return path;
 }
 

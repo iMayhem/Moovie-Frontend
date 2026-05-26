@@ -202,29 +202,71 @@ export default defineComponent({
         // Internal single-attempt fetch
         const _attemptResolve = async (): Promise<any> => {
             const type = props.mediaType;
+            
+            console.log('[StreamFrame DEBUG] Starting stream resolution');
+            console.log('[StreamFrame DEBUG] Props:', {
+                embedUrl: props.embedUrl,
+                mediaType: props.mediaType,
+                mediaId: props.mediaId,
+                title: props.title,
+                season: props.season,
+                episode: props.episode
+            });
 
             if (props.embedUrl.startsWith('NATIVE:')) {
                 let apiPath = props.embedUrl.substring(7); // Remove 'NATIVE:' prefix
+                console.log('[StreamFrame DEBUG] Native mode - API path:', apiPath);
+                
                 const cleanUrl = buildApiUrl(apiPath);
+                console.log('[StreamFrame DEBUG] Clean URL:', cleanUrl);
                 
                 console.log(`[StreamFrame] Native direct fetch: ${cleanUrl}`);
-                const resolveRes = await fetch(cleanUrl);
-                if (!resolveRes.ok) throw new Error('Moovie resolver is offline');
-                return await resolveRes.json();
+                
+                try {
+                    const resolveRes = await fetch(cleanUrl);
+                    console.log('[StreamFrame DEBUG] Fetch response status:', resolveRes.status);
+                    console.log('[StreamFrame DEBUG] Fetch response headers:', Object.fromEntries(resolveRes.headers.entries()));
+                    
+                    if (!resolveRes.ok) {
+                        console.error('[StreamFrame DEBUG] Fetch failed with status:', resolveRes.status);
+                        throw new Error('Moovie resolver is offline');
+                    }
+                    
+                    const data = await resolveRes.json();
+                    console.log('[StreamFrame DEBUG] Received data:', data);
+                    console.log('[StreamFrame DEBUG] Number of options:', data.options?.length || 0);
+                    console.log('[StreamFrame DEBUG] Number of captions:', data.captions?.length || 0);
+                    
+                    return data;
+                } catch (error) {
+                    console.error('[StreamFrame DEBUG] Fetch error:', error);
+                    throw error;
+                }
             } else {
+                console.log('[StreamFrame DEBUG] Non-native mode - using VPS proxy');
                 const titleEnc = encodeURIComponent(props.title);
                 const searchUrl = `https://api.moovie.fun/vps-proxy/search?q=${titleEnc}&type=${type === 'movie' ? 'movie' : 'tv'}`;
+                console.log('[StreamFrame DEBUG] Search URL:', searchUrl);
+                
                 const searchRes = await fetch(searchUrl);
                 if (!searchRes.ok) throw new Error('Metadata resolver is currently offline');
                 const searchData = await searchRes.json();
+                console.log('[StreamFrame DEBUG] Search data:', searchData);
+                
                 const item = searchData.results?.[0];
                 if (!item) throw new Error('No matching streaming source found');
+                
                 const detailPath = item.raw?.detailPath || item.pageUrl;
                 const subjectId = item.id;
                 const resolveUrl = `https://api.moovie.fun/vps-proxy/resolve?detailPath=${encodeURIComponent(detailPath)}&subjectId=${subjectId}&type=${type}&season=${props.season}&episode=${props.episode}`;
+                console.log('[StreamFrame DEBUG] Resolve URL:', resolveUrl);
+                
                 const resolveRes = await fetch(resolveUrl);
                 if (!resolveRes.ok) throw new Error('Failed to resolve media stream URLs');
-                return await resolveRes.json();
+                
+                const data = await resolveRes.json();
+                console.log('[StreamFrame DEBUG] Resolve data:', data);
+                return data;
             }
         };
 
