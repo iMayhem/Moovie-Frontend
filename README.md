@@ -1,3 +1,10 @@
+<img width="1360" height="605" alt="image" src="https://github.com/user-attachments/assets/2968fd7e-9ebb-4193-bffe-628ffa9869f5" />
+
+<img width="1360" height="605" alt="image" src="https://github.com/user-attachments/assets/af8c0512-2ea9-49ab-99b5-e594210f37c7" />
+
+<img width="1360" height="605" alt="image" src="https://github.com/user-attachments/assets/ca0a2a73-9f76-4c47-bdcf-2d82ead3c1c4" />
+
+
 # Moovie - Vue Movie Streaming Platform
 
 A modern Vue.js movie streaming platform with a clean, responsive UI.
