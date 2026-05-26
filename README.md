@@ -4,6 +4,10 @@
 
 <img width="1360" height="605" alt="image" src="https://github.com/user-attachments/assets/ca0a2a73-9f76-4c47-bdcf-2d82ead3c1c4" />
 
+<img width="1360" height="605" alt="image" src="https://github.com/user-attachments/assets/c7027580-9e54-4c88-be9a-b352a4211b13" />
+
+<img width="1360" height="605" alt="image" src="https://github.com/user-attachments/assets/94114dcc-c9f5-4a97-ab61-5f7fdab9eeeb" />
+
 
 # Moovie - Vue Movie Streaming Platform
 
